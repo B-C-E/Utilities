@@ -52,6 +52,10 @@ public class BasicDriver
                 case 'e':
                     b_readyToExit = true;
                     break;
+
+                //ERROR
+                default:
+                    throw new IndexOutOfBoundsException("User selected a valid Option with no Implementation");
             }//END OF SWITCH
 
         }//END OF DRIVER LOOP
