@@ -32,44 +32,148 @@ public class GetInput
         }//end of loop
     }//end of getYN
 
-    //from a range of ints [inclusive], select one
-    public static int getRange(int min, int max)
+    //from a range of longs [inclusive], select one
+    public static long getRangeLong(long min, long max)
     {
         Scanner scn_kkb = new Scanner(System.in);
         while (true)
         {
             String input = scn_kkb.next();
+            String goodInput = "";
+
+            //if negative
+            if (input.charAt(0) == '-')
+            {
+            goodInput+= "-";
+            }
+
             for (int i = 0; i < input.length(); i++)//go through each character of the input
             {
-                if (input.charAt(i) < 48 || input.charAt(i) > 57)//if the character is not a number, remove it
+                if (!(input.charAt(i) < 48 || input.charAt(i) > 57))//if the character is not a number, don't add it
                 {
-                   input.replaceFirst(input.charAt(i)+"","");
-                    i--;
+                    //otherwise, do add it
+                    goodInput+= input.charAt(i);
                 }
 
             }//end of going through each character of input and removing non numbers
 
-        int numb = Integer.parseInt(input);
 
-            if (numb >= min && numb <= max)
+            if (goodInput != "")
             {
-                return numb;
+                long numb = Long.parseLong(goodInput);
+                if (numb >= min && numb <= max)
+                {
+                    return numb;
+                } else
+                {
+                    System.out.println("Please type a number between " + min + " and " + max);
+                }
+                //No good input? Loop!
             }
-            else
-            {
-                System.out.println("Please type a number between " + min + " and " + max);
-            }
-            //No good input? Loop!
+            System.out.println("Please type a number between " + min + " and " + max);
         }//end of loop
-    }//end of getRange
+    }//end of getRangeLong
 
+    //from a range of ints [inclusive], select one
+    public static int getRangeInt(int min, int max)
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        while (true)
+        {
+            String input = scn_kkb.next();
+            String goodInput = "";
+
+            //if negative
+            if (input.charAt(0) == '-')
+            {
+                goodInput+= "-";
+            }
+
+            for (int i = 0; i < input.length(); i++)//go through each character of the input
+            {
+                if (!(input.charAt(i) < 48 || input.charAt(i) > 57))//if the character is not a number, don't add it
+                {
+                    //if it is, do
+                    goodInput+= input.charAt(i);
+                }
+
+            }//end of going through each character of input and removing non numbers
+
+
+            if (goodInput != "")
+            {
+                long numb = Int.parseInt(goodInput);
+                if (numb >= min && numb <= max)
+                {
+                    return numb;
+                } else
+                {
+                    System.out.println("Please type a number between " + min + " and " + max);
+                }
+                //No good input? Loop!
+            }
+            System.out.println("Please type a number between " + min + " and " + max);
+        }//end of loop
+    }//end of getRangeInt
+
+    //from a range of doubles [inclusive], select one
+    public static int getRangeDouble(double min, double max)
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        while (true)
+        {
+            String input = scn_kkb.next();
+            String goodInput = "";
+
+            //if negative
+            if (input.charAt(0) == '-')
+            {
+                goodInput+= "-";
+            }
+
+            int periodCount 0;
+
+            for (int i = 0; i < input.length(); i++)//go through each character of the input
+            {
+                if (!(input.charAt(i) < 48 || input.charAt(i) > 57))
+                    //if the character is not a number, don't add it
+                {
+                    //if it is, do
+                    goodInput+= input.charAt(i);
+                }
+
+                //if it's the first found period
+                if ((periodCount == 0 && input.charAt(i) == '.') )
+                {
+                    goodInput+= ".";
+                    periodCount++;
+                }
+
+            }//end of going through each character of input and removing non numbers
+
+
+            if (goodInput != "")
+            {
+                long numb = Int.parseInt(goodInput);
+                if (numb >= min && numb <= max)
+                {
+                    return numb;
+                } else
+                {
+                    System.out.println("Please type a number between " + min + " and " + max);
+                }
+                //No good input? Loop!
+            }
+            System.out.println("Please type a number between " + min + " and " + max);
+        }//end of loop
+    }//end of getRangeDouble
 
 
     //from a selection of char options, get the user to choose one
     //if you run this with only one option, you will get an error
     public static char get(char ... options)
     {
-            Scanner scn_kkb = new Scanner(System.in);//make a scanner
+        Scanner scn_kkb = new Scanner(System.in);//make a scanner
         while (true)
         {
             String input = scn_kkb.next();//get input from user
@@ -85,17 +189,20 @@ public class GetInput
             }//end of loop through all options
 
             //explain to the user what the program wants
-            System.out.print("Please type " + options[0]);
+            //Ex: Please type [a] or [b] or [c] or [d]
+            System.out.print("Please type [" + options[0]);
             for (int i = 1; i < options.length; i++)
             {
-                System.out.print(" or " + options[i]);
+                System.out.print("] or [" + options[i]);
+                System.out.println("]");
             }
 
             //No good input? Loop!
         }//end of loop
-        }//end of get
+    }//end of get
 
-    //gets the user to input a string with only lower case letters (and no numbers, etc)
+
+    //gets the user to input a string with only lower case letters (and no numbers,spaces, etc)
     //and minimum size minSize
     public static String getCleanString(int minSize)
     {
@@ -131,6 +238,13 @@ public class GetInput
             //No good input? Loop!
         }//end of loop
     }//end of getCleanString
+
+    //gets a string from the user
+    public static String getString()
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        return scn_kkb.next();
+    }//end of getString
 
 
 }//end of getInput
