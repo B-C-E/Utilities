@@ -243,7 +243,7 @@ public class GetInput
     public static String getString()
     {
         Scanner scn_kkb = new Scanner(System.in);
-        return scn_kkb.next();
+        return scn_kkb.nextLine();
     }//end of getString
 
 
