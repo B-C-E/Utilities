@@ -1,4 +1,4 @@
-package com.pack;
+package pack;
 
 import java.util.Scanner;
 
@@ -102,7 +102,7 @@ public class GetInput
 
             if (goodInput != "")
             {
-                long numb = Int.parseInt(goodInput);
+                int numb = Integer.parseInt(goodInput);
                 if (numb >= min && numb <= max)
                 {
                     return numb;
@@ -117,7 +117,7 @@ public class GetInput
     }//end of getRangeInt
 
     //from a range of doubles [inclusive], select one
-    public static int getRangeDouble(double min, double max)
+    public static double getRangeDouble(double min, double max)
     {
         Scanner scn_kkb = new Scanner(System.in);
         while (true)
@@ -131,7 +131,7 @@ public class GetInput
                 goodInput+= "-";
             }
 
-            int periodCount 0;
+            int periodCount = 0;
 
             for (int i = 0; i < input.length(); i++)//go through each character of the input
             {
@@ -154,7 +154,7 @@ public class GetInput
 
             if (goodInput != "")
             {
-                long numb = Int.parseInt(goodInput);
+                double numb = Double.parseDouble(goodInput);
                 if (numb >= min && numb <= max)
                 {
                     return numb;
