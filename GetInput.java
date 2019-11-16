@@ -7,6 +7,8 @@ import java.util.Scanner;
 //(This sort of GetInput thing comes up a lot)
 //Gets input from the user, and forces them to retype their input if it is bad
 
+
+//@TODO - Add a list of all the methods
 public class GetInput
 {
     //gets the user to input yes or no
@@ -16,7 +18,7 @@ public class GetInput
         Scanner scn_kkb = new Scanner(System.in);//make a scanner
         while(true)
         {
-            String input = scn_kkb.next();
+            String input = scn_kkb.nextLine() + " ";
             if (Character.toLowerCase(input.charAt(0)) == 'y')//if they typed yes
             {
                 return 'y';
@@ -38,13 +40,13 @@ public class GetInput
         Scanner scn_kkb = new Scanner(System.in);
         while (true)
         {
-            String input = scn_kkb.next();
+            String input = scn_kkb.nextLine() + " ";
             String goodInput = "";
 
             //if negative
             if (input.charAt(0) == '-')
             {
-            goodInput+= "-";
+                goodInput+= "-";
             }
 
             for (int i = 0; i < input.length(); i++)//go through each character of the input
@@ -60,13 +62,11 @@ public class GetInput
 
             if (goodInput != "")
             {
+                goodInput = shortenString(goodInput,(Long.MAX_VALUE+ "").length() -1 );
                 long numb = Long.parseLong(goodInput);
                 if (numb >= min && numb <= max)
                 {
                     return numb;
-                } else
-                {
-                    System.out.println("Please type a number between " + min + " and " + max);
                 }
                 //No good input? Loop!
             }
@@ -74,13 +74,38 @@ public class GetInput
         }//end of loop
     }//end of getRangeLong
 
+
+    //gets a char
+    public static char getChar()
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        return (scn_kkb.nextLine()+" ").toLowerCase().charAt(0);
+    }//end of getChar
+
+    //gets a char from a --> z
+    public static char getLetter()
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        while (true)
+        {
+            char ch = (scn_kkb.nextLine() + " ").toLowerCase().charAt(0);
+            if (ch >= 97 && ch <= 122)
+            {
+                return ch;
+            }
+            System.out.println("Please type a letter.");
+        }
+
+    }//end of getChar
+
+
     //from a range of ints [inclusive], select one
     public static int getRangeInt(int min, int max)
     {
         Scanner scn_kkb = new Scanner(System.in);
         while (true)
         {
-            String input = scn_kkb.next();
+            String input = scn_kkb.nextLine() + " ";
             String goodInput = "";
 
             //if negative
@@ -102,13 +127,11 @@ public class GetInput
 
             if (goodInput != "")
             {
+                goodInput = shortenString(goodInput,(Integer.MAX_VALUE+ "").length()-1);
                 int numb = Integer.parseInt(goodInput);
                 if (numb >= min && numb <= max)
                 {
                     return numb;
-                } else
-                {
-                    System.out.println("Please type a number between " + min + " and " + max);
                 }
                 //No good input? Loop!
             }
@@ -122,7 +145,7 @@ public class GetInput
         Scanner scn_kkb = new Scanner(System.in);
         while (true)
         {
-            String input = scn_kkb.next();
+            String input = scn_kkb.nextLine() + " ";
             String goodInput = "";
 
             //if negative
@@ -136,7 +159,7 @@ public class GetInput
             for (int i = 0; i < input.length(); i++)//go through each character of the input
             {
                 if (!(input.charAt(i) < 48 || input.charAt(i) > 57))
-                    //if the character is not a number, don't add it
+                //if the character is not a number, don't add it
                 {
                     //if it is, do
                     goodInput+= input.charAt(i);
@@ -154,13 +177,11 @@ public class GetInput
 
             if (goodInput != "")
             {
+                goodInput = shortenString(goodInput,(Double.MAX_VALUE+ "").length()-1);
                 double numb = Double.parseDouble(goodInput);
                 if (numb >= min && numb <= max)
                 {
                     return numb;
-                } else
-                {
-                    System.out.println("Please type a number between " + min + " and " + max);
                 }
                 //No good input? Loop!
             }
@@ -176,7 +197,7 @@ public class GetInput
         Scanner scn_kkb = new Scanner(System.in);//make a scanner
         while (true)
         {
-            String input = scn_kkb.next();//get input from user
+            String input = scn_kkb.nextLine();//get input from user
             input = input.toLowerCase();//convert to lower case
 
             //for all options, see if the user inputed that option
@@ -207,10 +228,10 @@ public class GetInput
     public static String getCleanString(int minSize)
     {
 
-        Scanner kkb = new Scanner(System.in);//scanner
+        Scanner scn_kkb = new Scanner(System.in);//scanner
         while (true)
         {
-            String input = kkb.next().toLowerCase();//get an input string from user
+            String input = scn_kkb.nextLine().toLowerCase();//get an input string from user
             String toReturn = "";//this will be returned at the end
             for (int i = 0; i < input.length(); i++)//go through each character of the input
             {
@@ -246,5 +267,32 @@ public class GetInput
         return scn_kkb.nextLine();
     }//end of getString
 
+
+
+    //#####################################################//
+    //                                                    #//
+    //                                                    #//
+    //                  private methods                   #//
+    //                                                    #//
+    //                                                    #//
+    //                                                    #//
+    //#####################################################//
+
+    //uses substring
+    private static String shortenString(String str, int targetLength)
+    {
+        if (str.length() > targetLength)
+        {
+            return str.substring(0, targetLength);
+        }
+        return str;
+    }//end of shortenString
+
+    //gets a string of length >=1. Automatically adds a space.
+    private static String getStringOnePlus()
+    {
+        Scanner scn_kkb = new Scanner(System.in);
+        return scn_kkb.nextLine() + " ";
+    }//end of getStringOnePlus
 
 }//end of getInput
